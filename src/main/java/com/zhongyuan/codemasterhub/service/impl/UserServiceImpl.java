@@ -11,8 +11,8 @@ import com.zhongyuan.codemasterhub.exception.ThrowUtils;
 import com.zhongyuan.codemasterhub.model.VO.UserVo;
 import com.zhongyuan.codemasterhub.model.domain.User;
 import com.zhongyuan.codemasterhub.mapper.UserMapper;
-import com.zhongyuan.codemasterhub.model.dto.user.AddUserRequest;
-import com.zhongyuan.codemasterhub.model.dto.user.UpdateUserRequest;
+import com.zhongyuan.codemasterhub.model.dto.user.UserAddRequest;
+import com.zhongyuan.codemasterhub.model.dto.user.UserUpdateRequest;
 import com.zhongyuan.codemasterhub.model.dto.user.UserLoginRequest;
 import com.zhongyuan.codemasterhub.model.dto.user.UserQueryRequest;
 import com.zhongyuan.codemasterhub.service.UserService;
@@ -23,7 +23,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
@@ -125,7 +124,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
     }
 
     @Override
-    public void updateUserByUser(UpdateUserRequest updateUserRequest, HttpServletRequest request) {
+    public void updateUserByUser(UserUpdateRequest updateUserRequest, HttpServletRequest request) {
         User currentUser = this.getCurrentUser(request);
 
         // 自己只能改自己的
@@ -146,7 +145,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
     }
 
     @Override
-    public Page<User> queryUserList(UserQueryRequest listUserRequest) {
+    public Page<User> queryList(UserQueryRequest listUserRequest) {
         long current = listUserRequest.getCurrent();
         long size = listUserRequest.getPageSize();
         return this.page(new Page<>(current, size),
@@ -182,7 +181,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
     }
 
     @Override
-    public void addUser(AddUserRequest addUserRequest) {
+    public void add(UserAddRequest addUserRequest) {
         String phoneNumber = addUserRequest.getPhoneNumber();
         String username = addUserRequest.getUsername();
         String nickname = addUserRequest.getNickname();
@@ -202,7 +201,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
     }
 
     @Override
-    public void updateUserByAdmin(UpdateUserRequest updateUserRequest) {
+    public void updateByAdmin(UserUpdateRequest updateUserRequest) {
         // 创建临时更新User
         User user = new User();
         BeanUtils.copyProperties(updateUserRequest, user);

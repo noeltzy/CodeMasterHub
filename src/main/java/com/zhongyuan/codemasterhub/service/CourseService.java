@@ -4,7 +4,9 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.zhongyuan.codemasterhub.model.VO.CourseVo;
 import com.zhongyuan.codemasterhub.model.domain.Course;
-import com.zhongyuan.codemasterhub.model.dto.Course.CourseQueryRequest;
+import com.zhongyuan.codemasterhub.model.dto.course.CourseAddRequest;
+import com.zhongyuan.codemasterhub.model.dto.course.CourseQueryRequest;
+import com.zhongyuan.codemasterhub.model.dto.course.CourseUpdateRequest;
 
 import java.util.List;
 
@@ -15,11 +17,17 @@ import java.util.List;
 */
 public interface CourseService extends IService<Course> {
 
-    Page<CourseVo> queryCourseList(CourseQueryRequest courseQueryRequest);
+    Page<CourseVo> queryVoList(CourseQueryRequest courseQueryRequest);
 
-    CourseVo getOneCourseVoById(Long id);
+    CourseVo getVoById(Long id);
 
     List<CourseVo> getCourseVoByIdList(List<Long> favoriteCourseIdList);
 
     boolean existById(Long id);
+
+    void add(CourseAddRequest addCourseRequest);
+
+    void updateByAdmin(CourseUpdateRequest updateCourseRequest);
+
+    Page<Course> queryList(CourseQueryRequest listCourseRequest);
 }

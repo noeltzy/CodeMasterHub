@@ -6,7 +6,7 @@ import com.zhongyuan.codemasterhub.common.ResultUtils;
 import com.zhongyuan.codemasterhub.constant.UserConstant;
 import com.zhongyuan.codemasterhub.exception.ThrowUtils;
 import com.zhongyuan.codemasterhub.model.VO.UserVo;
-import com.zhongyuan.codemasterhub.model.dto.user.UpdateUserRequest;
+import com.zhongyuan.codemasterhub.model.dto.user.UserUpdateRequest;
 import com.zhongyuan.codemasterhub.model.dto.user.UserLoginRequest;
 import com.zhongyuan.codemasterhub.service.UserService;
 import com.zhongyuan.codemasterhub.utils.RequestParamsUtils;
@@ -60,7 +60,7 @@ public class UserController {
     }
 
     @PostMapping("/update")
-    public BaseResponse<String> updateUser(@RequestBody UpdateUserRequest updateUserRequest, HttpServletRequest request) {
+    public BaseResponse<String> updateUser(@RequestBody UserUpdateRequest updateUserRequest, HttpServletRequest request) {
         ThrowUtils.throwIf(updateUserRequest == null, ErrorCode.PARAMS_ERROR);
         userService.updateUserByUser(updateUserRequest,request);
         return ResultUtils.success();

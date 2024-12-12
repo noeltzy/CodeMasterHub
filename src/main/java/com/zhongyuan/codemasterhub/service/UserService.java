@@ -1,12 +1,11 @@
 package com.zhongyuan.codemasterhub.service;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.zhongyuan.codemasterhub.model.VO.UserVo;
 import com.zhongyuan.codemasterhub.model.domain.User;
-import com.zhongyuan.codemasterhub.model.dto.user.AddUserRequest;
-import com.zhongyuan.codemasterhub.model.dto.user.UpdateUserRequest;
+import com.zhongyuan.codemasterhub.model.dto.user.UserAddRequest;
+import com.zhongyuan.codemasterhub.model.dto.user.UserUpdateRequest;
 import com.zhongyuan.codemasterhub.model.dto.user.UserLoginRequest;
 import com.zhongyuan.codemasterhub.model.dto.user.UserQueryRequest;
 import jakarta.servlet.http.HttpServletRequest;
@@ -24,12 +23,12 @@ public interface UserService extends IService<User> {
 
     UserVo getCurrentUserVo(HttpServletRequest request);
 
-    void updateUserByUser(UpdateUserRequest updateUserRequest, HttpServletRequest request);
+    void updateUserByUser(UserUpdateRequest updateUserRequest, HttpServletRequest request);
 
-    Page<User> queryUserList(UserQueryRequest listUserRequest);
+    Page<User> queryList(UserQueryRequest listUserRequest);
 
 
-    void addUser(AddUserRequest addUserRequest);
+    void add(UserAddRequest addUserRequest);
 
-    void updateUserByAdmin(UpdateUserRequest updateUserRequest);
+    void updateByAdmin(UserUpdateRequest updateUserRequest);
 }

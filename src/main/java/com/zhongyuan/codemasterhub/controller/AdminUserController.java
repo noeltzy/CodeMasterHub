@@ -8,8 +8,8 @@ import com.zhongyuan.codemasterhub.common.IdRequest;
 import com.zhongyuan.codemasterhub.common.ResultUtils;
 import com.zhongyuan.codemasterhub.exception.ThrowUtils;
 import com.zhongyuan.codemasterhub.model.domain.User;
-import com.zhongyuan.codemasterhub.model.dto.user.AddUserRequest;
-import com.zhongyuan.codemasterhub.model.dto.user.UpdateUserRequest;
+import com.zhongyuan.codemasterhub.model.dto.user.UserAddRequest;
+import com.zhongyuan.codemasterhub.model.dto.user.UserUpdateRequest;
 import com.zhongyuan.codemasterhub.model.dto.user.UserQueryRequest;
 import com.zhongyuan.codemasterhub.service.UserService;
 import jakarta.annotation.Resource;
@@ -17,9 +17,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("")
+@RequestMapping("/admin/user")
 @Slf4j
-public class adminUserController {
+public class AdminUserController {
 
     @Resource
     private UserService userService;
@@ -36,24 +36,24 @@ public class adminUserController {
     @PostMapping("/list")
     public BaseResponse<Page<User>> getUserList(@RequestBody UserQueryRequest listUserRequest) {
         ThrowUtils.throwIf(listUserRequest == null, ErrorCode.PARAMS_ERROR);
-        Page<User> userPage = userService.queryUserList(listUserRequest);
+        Page<User> userPage = userService.queryList(listUserRequest);
         return ResultUtils.success(userPage);
     }
 
     //增
     @PostMapping("/add")
-    public BaseResponse<String> addUser(@RequestBody AddUserRequest addUserRequest) {
+    public BaseResponse<String> addUser(@RequestBody UserAddRequest addUserRequest) {
         ThrowUtils.throwIf(addUserRequest == null, ErrorCode.PARAMS_ERROR);
-        userService.addUser(addUserRequest);
+        userService.add(addUserRequest);
         return ResultUtils.success();
     }
 
 
     //update
     @PostMapping("/update")
-    public BaseResponse<String> updateUser(@RequestBody UpdateUserRequest updateUserRequest) {
+    public BaseResponse<String> updateUser(@RequestBody UserUpdateRequest updateUserRequest) {
         ThrowUtils.throwIf(updateUserRequest == null, ErrorCode.PARAMS_ERROR);
-        userService.updateUserByAdmin(updateUserRequest);
+        userService.updateByAdmin(updateUserRequest);
         return ResultUtils.success();
     }
 

@@ -1,4 +1,4 @@
-package com.zhongyuan.codemasterhub.model.dto.Course;
+package com.zhongyuan.codemasterhub.model.dto.course;
 
 import com.zhongyuan.codemasterhub.common.PageRequest;
 import lombok.Data;

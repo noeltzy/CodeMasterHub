@@ -1,8 +1,10 @@
 package com.zhongyuan.codemasterhub.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.zhongyuan.codemasterhub.model.VO.CourseTagVo;
 import com.zhongyuan.codemasterhub.model.domain.CourseTag;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.zhongyuan.codemasterhub.model.dto.courseTag.CourseTagQueryRequest;
 
 import java.util.List;
 
@@ -14,4 +16,6 @@ import java.util.List;
 public interface CourseTagService extends IService<CourseTag> {
 
     List<CourseTagVo> getAllTagVo();
+
+    Page<CourseTagVo> queryList(CourseTagQueryRequest courseTagQueryRequest);
 }
